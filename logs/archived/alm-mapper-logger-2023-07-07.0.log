@@ -1,0 +1,97 @@
+2023-07-07 09:10:15,901 INFO 	 org.springframework.boot.StartupInfoLogger [main] (55):	 Starting AlmMapperApplicationTests using Java 13.0.2 on LAP-DELL7490-02 with PID 10828 (started by Hauke in C:\Users\hauke\cup\dev\alm-mapper)
+2023-07-07 09:10:15,906 DEBUG 	 org.springframework.boot.StartupInfoLogger [main] (56):	 Running with Spring Boot v2.5.6, Spring v5.3.12
+2023-07-07 09:10:15,909 INFO 	 org.springframework.boot.SpringApplication [main] (659):	 No active profile set, falling back to default profiles: default
+2023-07-07 09:10:15,931 INFO 	 org.hibernate.validator.internal.util.Version [background-preinit] (21):	 HV000001: Hibernate Validator 6.2.0.Final
+2023-07-07 09:10:17,430 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (132):	 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-07 09:10:17,462 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (201):	 Finished Spring Data repository scanning in 13 ms. Found 0 JPA repository interfaces.
+2023-07-07 09:10:19,303 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (110):	 HikariPool-1 - Starting...
+2023-07-07 09:10:19,671 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (123):	 HikariPool-1 - Start completed.
+2023-07-07 09:10:19,912 INFO 	 org.hibernate.jpa.internal.util.LogHelper [main] (31):	 HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-07 09:10:20,181 INFO 	 org.hibernate.Version [main] (44):	 HHH000412: Hibernate ORM core version 5.4.32.Final
+2023-07-07 09:10:20,616 INFO 	 org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] (56):	 HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-07-07 09:10:21,033 INFO 	 org.hibernate.dialect.Dialect [main] (175):	 HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-07-07 09:10:21,630 INFO 	 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] (52):	 HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-07 09:10:21,654 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] (437):	 Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-07 09:10:22,535 WARN 	 org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] (219):	 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-07 09:10:24,489 INFO 	 org.springframework.boot.StartupInfoLogger [main] (61):	 Started AlmMapperApplicationTests in 9.138 seconds (JVM running for 11.991)
+2023-07-07 09:10:25,255 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] (651):	 Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-07 09:10:25,257 INFO 	 org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl [SpringApplicationShutdownHook] (526):	 HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2023-07-07 09:10:25,261 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (350):	 HikariPool-1 - Shutdown initiated...
+2023-07-07 09:10:25,270 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (352):	 HikariPool-1 - Shutdown completed.
+2023-07-07 09:12:00,308 INFO 	 org.hibernate.validator.internal.util.Version [background-preinit] (21):	 HV000001: Hibernate Validator 6.2.0.Final
+2023-07-07 09:12:00,327 INFO 	 org.springframework.boot.StartupInfoLogger [main] (55):	 Starting AlmMapperApplication v0.0.1 using Java 11.0.12 on LAP-DELL7490-02 with PID 10472 (C:\Users\hauke\cup\dev\alm-mapper\target\alm-mapper.jar started by Hauke in C:\Users\hauke\cup\dev\alm-mapper)
+2023-07-07 09:12:00,330 DEBUG 	 org.springframework.boot.StartupInfoLogger [main] (56):	 Running with Spring Boot v2.5.6, Spring v5.3.12
+2023-07-07 09:12:00,331 INFO 	 org.springframework.boot.SpringApplication [main] (659):	 No active profile set, falling back to default profiles: default
+2023-07-07 09:12:01,184 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (132):	 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-07 09:12:01,203 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (201):	 Finished Spring Data repository scanning in 6 ms. Found 0 JPA repository interfaces.
+2023-07-07 09:12:02,482 INFO 	 org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] (108):	 Tomcat initialized with port(s): 8089 (http)
+2023-07-07 09:12:02,500 INFO 	 org.apache.juli.logging.DirectJDKLog [main] (173):	 Initializing ProtocolHandler ["http-nio-8089"]
+2023-07-07 09:12:02,502 INFO 	 org.apache.juli.logging.DirectJDKLog [main] (173):	 Starting service [Tomcat]
+2023-07-07 09:12:02,503 INFO 	 org.apache.juli.logging.DirectJDKLog [main] (173):	 Starting Servlet engine: [Apache Tomcat/9.0.54]
+2023-07-07 09:12:02,569 INFO 	 org.apache.juli.logging.DirectJDKLog [main] (173):	 Initializing Spring embedded WebApplicationContext
+2023-07-07 09:12:02,569 INFO 	 org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] (290):	 Root WebApplicationContext: initialization completed in 2176 ms
+2023-07-07 09:12:02,733 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (110):	 HikariPool-1 - Starting...
+2023-07-07 09:12:02,985 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (123):	 HikariPool-1 - Start completed.
+2023-07-07 09:12:03,082 INFO 	 org.hibernate.jpa.internal.util.LogHelper [main] (31):	 HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-07 09:12:03,153 INFO 	 org.hibernate.Version [main] (44):	 HHH000412: Hibernate ORM core version 5.4.32.Final
+2023-07-07 09:12:03,310 INFO 	 org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] (56):	 HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-07-07 09:12:03,505 INFO 	 org.hibernate.dialect.Dialect [main] (175):	 HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-07-07 09:12:03,820 INFO 	 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] (52):	 HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-07 09:12:03,831 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] (437):	 Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-07 09:12:03,970 WARN 	 org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] (219):	 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-07 09:12:04,405 INFO 	 org.apache.juli.logging.DirectJDKLog [main] (173):	 Starting ProtocolHandler ["http-nio-8089"]
+2023-07-07 09:12:04,445 INFO 	 org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] (220):	 Tomcat started on port(s): 8089 (http) with context path '/alm-mapper'
+2023-07-07 09:12:04,461 INFO 	 org.springframework.boot.StartupInfoLogger [main] (61):	 Started AlmMapperApplication in 4.874 seconds (JVM running for 5.692)
+2023-07-07 09:12:21,896 INFO 	 org.apache.juli.logging.DirectJDKLog [http-nio-8089-exec-1] (173):	 Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-07 09:12:21,897 INFO 	 org.springframework.web.servlet.FrameworkServlet [http-nio-8089-exec-1] (525):	 Initializing Servlet 'dispatcherServlet'
+2023-07-07 09:12:21,899 INFO 	 org.springframework.web.servlet.FrameworkServlet [http-nio-8089-exec-1] (547):	 Completed initialization in 1 ms
+2023-07-07 09:12:22,001 INFO 	 com.ridonit.alm.controller.AlmApiRootController [http-nio-8089-exec-1] (20):	 alm-mapper is alive
+2023-07-07 09:12:22,002 TRACE 	 com.ridonit.alm.controller.AlmApiRootController [http-nio-8089-exec-1] (22):	 TRACE Message
+2023-07-07 09:12:22,003 DEBUG 	 com.ridonit.alm.controller.AlmApiRootController [http-nio-8089-exec-1] (23):	 DEBUG Message
+2023-07-07 09:12:22,004 INFO 	 com.ridonit.alm.controller.AlmApiRootController [http-nio-8089-exec-1] (24):	 INFO  Message
+2023-07-07 09:12:22,005 WARN 	 com.ridonit.alm.controller.AlmApiRootController [http-nio-8089-exec-1] (25):	 WARN  Message
+2023-07-07 09:12:22,005 ERROR 	 com.ridonit.alm.controller.AlmApiRootController [http-nio-8089-exec-1] (26):	 ERROR Message
+2023-07-07 09:17:32,511 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] (651):	 Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-07 09:17:32,512 INFO 	 org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl [SpringApplicationShutdownHook] (526):	 HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2023-07-07 09:17:32,516 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (350):	 HikariPool-1 - Shutdown initiated...
+2023-07-07 09:17:32,522 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (352):	 HikariPool-1 - Shutdown completed.
+2023-07-07 12:11:52,539 INFO 	 org.springframework.boot.StartupInfoLogger [main] (55):	 Starting AlmMapperApplicationTests using Java 13.0.2 on LAP-DELL7490-02 with PID 19544 (started by Hauke in C:\Users\hauke\cup\dev\alm-mapper)
+2023-07-07 12:11:52,541 DEBUG 	 org.springframework.boot.StartupInfoLogger [main] (56):	 Running with Spring Boot v2.5.6, Spring v5.3.12
+2023-07-07 12:11:52,547 INFO 	 org.springframework.boot.SpringApplication [main] (659):	 No active profile set, falling back to default profiles: default
+2023-07-07 12:11:52,550 INFO 	 org.hibernate.validator.internal.util.Version [background-preinit] (21):	 HV000001: Hibernate Validator 6.2.0.Final
+2023-07-07 12:11:53,579 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (132):	 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-07 12:11:53,603 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (201):	 Finished Spring Data repository scanning in 11 ms. Found 0 JPA repository interfaces.
+2023-07-07 12:11:55,072 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (110):	 HikariPool-1 - Starting...
+2023-07-07 12:11:55,416 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (123):	 HikariPool-1 - Start completed.
+2023-07-07 12:11:55,546 INFO 	 org.hibernate.jpa.internal.util.LogHelper [main] (31):	 HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-07 12:11:55,633 INFO 	 org.hibernate.Version [main] (44):	 HHH000412: Hibernate ORM core version 5.4.32.Final
+2023-07-07 12:11:55,867 INFO 	 org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] (56):	 HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-07-07 12:11:56,126 INFO 	 org.hibernate.dialect.Dialect [main] (175):	 HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-07-07 12:11:56,546 INFO 	 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] (52):	 HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-07 12:11:56,560 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] (437):	 Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-07 12:11:57,148 WARN 	 org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] (219):	 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-07 12:11:58,210 INFO 	 org.springframework.boot.StartupInfoLogger [main] (61):	 Started AlmMapperApplicationTests in 6.155 seconds (JVM running for 7.429)
+2023-07-07 12:11:58,697 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] (651):	 Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-07 12:11:58,698 INFO 	 org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl [SpringApplicationShutdownHook] (526):	 HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2023-07-07 12:11:58,703 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (350):	 HikariPool-1 - Shutdown initiated...
+2023-07-07 12:11:58,712 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (352):	 HikariPool-1 - Shutdown completed.
+2023-07-07 12:22:14,162 INFO 	 org.springframework.boot.StartupInfoLogger [main] (55):	 Starting AlmMapperApplicationTests using Java 13.0.2 on LAP-DELL7490-02 with PID 12104 (started by Hauke in C:\Users\hauke\cup\dev\alm-mapper)
+2023-07-07 12:22:14,164 DEBUG 	 org.springframework.boot.StartupInfoLogger [main] (56):	 Running with Spring Boot v2.5.6, Spring v5.3.12
+2023-07-07 12:22:14,167 INFO 	 org.springframework.boot.SpringApplication [main] (659):	 No active profile set, falling back to default profiles: default
+2023-07-07 12:22:14,178 INFO 	 org.hibernate.validator.internal.util.Version [background-preinit] (21):	 HV000001: Hibernate Validator 6.2.0.Final
+2023-07-07 12:22:15,260 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (132):	 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-07 12:22:15,281 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (201):	 Finished Spring Data repository scanning in 10 ms. Found 0 JPA repository interfaces.
+2023-07-07 12:22:16,586 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (110):	 HikariPool-1 - Starting...
+2023-07-07 12:22:16,865 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (123):	 HikariPool-1 - Start completed.
+2023-07-07 12:22:16,972 INFO 	 org.hibernate.jpa.internal.util.LogHelper [main] (31):	 HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-07 12:22:17,075 INFO 	 org.hibernate.Version [main] (44):	 HHH000412: Hibernate ORM core version 5.4.32.Final
+2023-07-07 12:22:17,271 INFO 	 org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] (56):	 HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-07-07 12:22:17,492 INFO 	 org.hibernate.dialect.Dialect [main] (175):	 HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-07-07 12:22:17,830 INFO 	 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] (52):	 HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-07 12:22:17,842 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] (437):	 Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-07 12:22:18,356 WARN 	 org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] (219):	 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-07 12:22:19,296 INFO 	 org.springframework.boot.StartupInfoLogger [main] (61):	 Started AlmMapperApplicationTests in 5.611 seconds (JVM running for 6.913)
+2023-07-07 12:22:19,764 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] (651):	 Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-07 12:22:19,765 INFO 	 org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl [SpringApplicationShutdownHook] (526):	 HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2023-07-07 12:22:19,771 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (350):	 HikariPool-1 - Shutdown initiated...
+2023-07-07 12:22:19,779 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (352):	 HikariPool-1 - Shutdown completed.
