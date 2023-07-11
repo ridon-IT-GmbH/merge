@@ -10732,3 +10732,149 @@ Caused by: java.net.SocketTimeoutException: connect timed out
 2023-07-11 08:42:40,699 INFO 	 org.springframework.boot.StartupInfoLogger [main] (61):	 Started AlmMapperApplication in 5.142 seconds (JVM running for 5.742)
 2023-07-11 08:42:40,703 WARN 	 com.ridonit.alm.mapper.C2AWatcher [main] (13):	 start thread .... Hauke
 2023-07-11 08:42:40,704 WARN 	 com.ridonit.alm.mapper.C2AWatcher [main] (16):	 thread started: Hauke
+2023-07-11 09:17:33,267 INFO 	 org.springframework.boot.StartupInfoLogger [main] (55):	 Starting AlmMapperApplicationTests using Java 11.0.19 on LAP-DELL5520-02 with PID 33612 (started by Hauke in C:\Users\hauke.AD\alm_hack2build\dev\merge)
+2023-07-11 09:17:33,268 DEBUG 	 org.springframework.boot.StartupInfoLogger [main] (56):	 Running with Spring Boot v2.5.6, Spring v5.3.12
+2023-07-11 09:17:33,268 INFO 	 org.springframework.boot.SpringApplication [main] (663):	 The following profiles are active: dev
+2023-07-11 09:17:33,277 INFO 	 org.hibernate.validator.internal.util.Version [background-preinit] (21):	 HV000001: Hibernate Validator 6.2.0.Final
+2023-07-11 09:17:34,427 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (132):	 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-11 09:17:34,466 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (201):	 Finished Spring Data repository scanning in 34 ms. Found 1 JPA repository interfaces.
+2023-07-11 09:17:35,061 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Flyway Community Edition 7.7.3 by Redgate
+2023-07-11 09:17:35,080 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (110):	 alm-db - Starting...
+2023-07-11 09:17:35,261 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (123):	 alm-db - Start completed.
+2023-07-11 09:17:35,294 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Database: jdbc:mariadb://127.0.0.1:3307/alm-db (MariaDB 11.0)
+2023-07-11 09:17:35,334 WARN 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (53):	 Flyway upgrade recommended: org.flywaydb.core.internal.database.mysql.mariadb.MariaDBDatabaseType@3d40498a 11.0 is newer than this version of Flyway and support has not been tested. The latest supported version of org.flywaydb.core.internal.database.mysql.mariadb.MariaDBDatabaseType@3d40498a is 10.5.
+2023-07-11 09:17:35,363 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Successfully validated 4 migrations (execution time 00:00.020s)
+2023-07-11 09:17:35,375 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Current version of schema `alm-db`: 3.0
+2023-07-11 09:17:35,388 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Migrating schema `alm-db` to version "4 - alter mapper config"
+2023-07-11 09:17:35,457 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 0 rows affected
+2023-07-11 09:17:35,481 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Successfully applied 1 migration to schema `alm-db`, now at version v4 (execution time 00:00.110s)
+2023-07-11 09:17:35,705 INFO 	 org.hibernate.jpa.internal.util.LogHelper [main] (31):	 HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-11 09:17:35,829 INFO 	 org.hibernate.Version [main] (44):	 HHH000412: Hibernate ORM core version 5.4.32.Final
+2023-07-11 09:17:36,167 INFO 	 org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] (56):	 HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-07-11 09:17:36,727 INFO 	 org.hibernate.dialect.Dialect [main] (175):	 HHH000400: Using dialect: org.hibernate.dialect.MariaDB103Dialect
+2023-07-11 09:17:37,587 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.calm.CalmProcess (class must be instantiated by Interceptor)
+2023-07-11 09:17:37,661 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.abap.AbapProcess (class must be instantiated by Interceptor)
+2023-07-11 09:17:37,684 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.status.StatusLine (class must be instantiated by Interceptor)
+2023-07-11 09:17:37,814 INFO 	 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] (52):	 HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-11 09:17:37,821 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] (437):	 Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-11 09:17:41,422 INFO 	 org.springframework.boot.StartupInfoLogger [main] (61):	 Started AlmMapperApplicationTests in 8.517 seconds (JVM running for 9.45)
+2023-07-11 09:17:41,744 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] (651):	 Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-11 09:17:41,747 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (350):	 alm-db - Shutdown initiated...
+2023-07-11 09:17:41,765 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (352):	 alm-db - Shutdown completed.
+2023-07-11 09:18:00,408 INFO 	 org.springframework.boot.StartupInfoLogger [main] (55):	 Starting AlmMapperApplicationTests using Java 11.0.19 on LAP-DELL5520-02 with PID 14488 (started by Hauke in C:\Users\hauke.AD\alm_hack2build\dev\merge)
+2023-07-11 09:18:00,410 DEBUG 	 org.springframework.boot.StartupInfoLogger [main] (56):	 Running with Spring Boot v2.5.6, Spring v5.3.12
+2023-07-11 09:18:00,410 INFO 	 org.springframework.boot.SpringApplication [main] (663):	 The following profiles are active: dev
+2023-07-11 09:18:00,421 INFO 	 org.hibernate.validator.internal.util.Version [background-preinit] (21):	 HV000001: Hibernate Validator 6.2.0.Final
+2023-07-11 09:18:01,394 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (132):	 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-11 09:18:01,443 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (201):	 Finished Spring Data repository scanning in 40 ms. Found 1 JPA repository interfaces.
+2023-07-11 09:18:02,057 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Flyway Community Edition 7.7.3 by Redgate
+2023-07-11 09:18:02,066 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (110):	 alm-db - Starting...
+2023-07-11 09:18:02,151 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (123):	 alm-db - Start completed.
+2023-07-11 09:18:02,175 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Database: jdbc:mariadb://127.0.0.1:3307/alm-db (MariaDB 11.0)
+2023-07-11 09:18:02,194 WARN 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (53):	 Flyway upgrade recommended: org.flywaydb.core.internal.database.mysql.mariadb.MariaDBDatabaseType@23e2c1ca 11.0 is newer than this version of Flyway and support has not been tested. The latest supported version of org.flywaydb.core.internal.database.mysql.mariadb.MariaDBDatabaseType@23e2c1ca is 10.5.
+2023-07-11 09:18:02,221 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Successfully validated 4 migrations (execution time 00:00.018s)
+2023-07-11 09:18:02,231 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Current version of schema `alm-db`: 4
+2023-07-11 09:18:02,232 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Schema `alm-db` is up to date. No migration necessary.
+2023-07-11 09:18:02,465 INFO 	 org.hibernate.jpa.internal.util.LogHelper [main] (31):	 HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-11 09:18:02,555 INFO 	 org.hibernate.Version [main] (44):	 HHH000412: Hibernate ORM core version 5.4.32.Final
+2023-07-11 09:18:02,823 INFO 	 org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] (56):	 HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-07-11 09:18:03,408 INFO 	 org.hibernate.dialect.Dialect [main] (175):	 HHH000400: Using dialect: org.hibernate.dialect.MariaDB103Dialect
+2023-07-11 09:18:04,286 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.calm.CalmProcess (class must be instantiated by Interceptor)
+2023-07-11 09:18:04,366 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.abap.AbapProcess (class must be instantiated by Interceptor)
+2023-07-11 09:18:04,387 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.status.StatusLine (class must be instantiated by Interceptor)
+2023-07-11 09:18:04,538 INFO 	 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] (52):	 HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-11 09:18:04,544 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] (437):	 Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-11 09:18:07,874 INFO 	 org.springframework.boot.StartupInfoLogger [main] (61):	 Started AlmMapperApplicationTests in 7.782 seconds (JVM running for 8.559)
+2023-07-11 09:18:08,128 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] (651):	 Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-11 09:18:08,132 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (350):	 alm-db - Shutdown initiated...
+2023-07-11 09:18:08,148 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (352):	 alm-db - Shutdown completed.
+2023-07-11 09:18:26,763 INFO 	 org.hibernate.validator.internal.util.Version [background-preinit] (21):	 HV000001: Hibernate Validator 6.2.0.Final
+2023-07-11 09:18:26,769 INFO 	 org.springframework.boot.StartupInfoLogger [main] (55):	 Starting AlmMapperApplication v0.0.1 using Java 11.0.19 on LAP-DELL5520-02 with PID 8412 (C:\Users\hauke.AD\alm_hack2build\dev\merge\target\alm-mapper.jar started by Hauke in C:\Users\hauke.AD\alm_hack2build\dev\merge)
+2023-07-11 09:18:26,770 DEBUG 	 org.springframework.boot.StartupInfoLogger [main] (56):	 Running with Spring Boot v2.5.6, Spring v5.3.12
+2023-07-11 09:18:26,770 INFO 	 org.springframework.boot.SpringApplication [main] (663):	 The following profiles are active: dev
+2023-07-11 09:18:27,818 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (132):	 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-11 09:18:27,876 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (201):	 Finished Spring Data repository scanning in 49 ms. Found 1 JPA repository interfaces.
+2023-07-11 09:18:28,602 INFO 	 org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] (108):	 Tomcat initialized with port(s): 7010 (http)
+2023-07-11 09:18:28,610 INFO 	 org.apache.juli.logging.DirectJDKLog [main] (173):	 Initializing ProtocolHandler ["http-nio-7010"]
+2023-07-11 09:18:28,611 INFO 	 org.apache.juli.logging.DirectJDKLog [main] (173):	 Starting service [Tomcat]
+2023-07-11 09:18:28,611 INFO 	 org.apache.juli.logging.DirectJDKLog [main] (173):	 Starting Servlet engine: [Apache Tomcat/9.0.54]
+2023-07-11 09:18:28,663 INFO 	 org.apache.juli.logging.DirectJDKLog [main] (173):	 Initializing Spring embedded WebApplicationContext
+2023-07-11 09:18:28,663 INFO 	 org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] (290):	 Root WebApplicationContext: initialization completed in 1836 ms
+2023-07-11 09:18:28,770 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Flyway Community Edition 7.7.3 by Redgate
+2023-07-11 09:18:28,781 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (110):	 alm_db - Starting...
+2023-07-11 09:18:28,958 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (123):	 alm_db - Start completed.
+2023-07-11 09:18:28,993 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Database: jdbc:postgresql://127.0.0.1:5432/alm_db (PostgreSQL 15.3)
+2023-07-11 09:18:29,004 WARN 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (53):	 Flyway upgrade recommended: org.flywaydb.core.internal.database.postgresql.PostgreSQLDatabaseType@240139e1 15.3 is newer than this version of Flyway and support has not been tested. The latest supported version of org.flywaydb.core.internal.database.postgresql.PostgreSQLDatabaseType@240139e1 is 13.
+2023-07-11 09:18:29,040 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Successfully validated 4 migrations (execution time 00:00.021s)
+2023-07-11 09:18:29,051 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Current version of schema "public": 3.0
+2023-07-11 09:18:29,060 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Migrating schema "public" to version "4 - alter mapper config"
+2023-07-11 09:18:29,069 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 0 rows affected
+2023-07-11 09:18:29,104 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Successfully applied 1 migration to schema "public", now at version v4 (execution time 00:00.058s)
+2023-07-11 09:18:29,192 INFO 	 org.hibernate.jpa.internal.util.LogHelper [main] (31):	 HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-11 09:18:29,232 INFO 	 org.hibernate.Version [main] (44):	 HHH000412: Hibernate ORM core version 5.4.32.Final
+2023-07-11 09:18:29,348 INFO 	 org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] (56):	 HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-07-11 09:18:29,446 INFO 	 org.hibernate.dialect.Dialect [main] (175):	 HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2023-07-11 09:18:30,010 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.calm.CalmProcess (class must be instantiated by Interceptor)
+2023-07-11 09:18:30,049 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.abap.AbapProcess (class must be instantiated by Interceptor)
+2023-07-11 09:18:30,059 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.status.StatusLine (class must be instantiated by Interceptor)
+2023-07-11 09:18:30,150 INFO 	 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] (52):	 HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-11 09:18:30,159 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] (437):	 Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-11 09:18:31,452 INFO 	 org.apache.juli.logging.DirectJDKLog [main] (173):	 Starting ProtocolHandler ["http-nio-7010"]
+2023-07-11 09:18:31,471 INFO 	 org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] (220):	 Tomcat started on port(s): 7010 (http) with context path '/alm-test'
+2023-07-11 09:18:31,763 INFO 	 org.springframework.boot.StartupInfoLogger [main] (61):	 Started AlmMapperApplication in 5.713 seconds (JVM running for 6.244)
+2023-07-11 09:18:31,769 WARN 	 com.ridonit.alm.mapper.C2AWatcher [main] (13):	 start thread .... Hauke
+2023-07-11 09:18:31,769 WARN 	 com.ridonit.alm.mapper.C2AWatcher [main] (16):	 thread started: Hauke
+2023-07-11 09:19:21,418 INFO 	 org.springframework.boot.StartupInfoLogger [main] (55):	 Starting AlmMapperApplicationTests using Java 11.0.19 on LAP-DELL5520-02 with PID 10140 (started by Hauke in C:\Users\hauke.AD\alm_hack2build\dev\merge)
+2023-07-11 09:19:21,421 DEBUG 	 org.springframework.boot.StartupInfoLogger [main] (56):	 Running with Spring Boot v2.5.6, Spring v5.3.12
+2023-07-11 09:19:21,421 INFO 	 org.springframework.boot.SpringApplication [main] (663):	 The following profiles are active: prod
+2023-07-11 09:19:21,435 INFO 	 org.hibernate.validator.internal.util.Version [background-preinit] (21):	 HV000001: Hibernate Validator 6.2.0.Final
+2023-07-11 09:19:22,332 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (132):	 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-11 09:19:22,368 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (201):	 Finished Spring Data repository scanning in 31 ms. Found 1 JPA repository interfaces.
+2023-07-11 09:19:22,958 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Flyway Community Edition 7.7.3 by Redgate
+2023-07-11 09:19:22,971 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (110):	 alm-db - Starting...
+2023-07-11 09:19:23,071 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (123):	 alm-db - Start completed.
+2023-07-11 09:19:23,096 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Database: jdbc:mariadb://127.0.0.1:3307/alm-db (MariaDB 11.0)
+2023-07-11 09:19:23,116 WARN 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (53):	 Flyway upgrade recommended: org.flywaydb.core.internal.database.mysql.mariadb.MariaDBDatabaseType@1e120628 11.0 is newer than this version of Flyway and support has not been tested. The latest supported version of org.flywaydb.core.internal.database.mysql.mariadb.MariaDBDatabaseType@1e120628 is 10.5.
+2023-07-11 09:19:23,149 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Successfully validated 4 migrations (execution time 00:00.020s)
+2023-07-11 09:19:23,160 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Current version of schema `alm-db`: 4
+2023-07-11 09:19:23,161 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Schema `alm-db` is up to date. No migration necessary.
+2023-07-11 09:19:23,390 INFO 	 org.hibernate.jpa.internal.util.LogHelper [main] (31):	 HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-11 09:19:23,505 INFO 	 org.hibernate.Version [main] (44):	 HHH000412: Hibernate ORM core version 5.4.32.Final
+2023-07-11 09:19:23,783 INFO 	 org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] (56):	 HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-07-11 09:19:24,401 INFO 	 org.hibernate.dialect.Dialect [main] (175):	 HHH000400: Using dialect: org.hibernate.dialect.MariaDB103Dialect
+2023-07-11 09:19:25,347 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.calm.CalmProcess (class must be instantiated by Interceptor)
+2023-07-11 09:19:25,454 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.abap.AbapProcess (class must be instantiated by Interceptor)
+2023-07-11 09:19:25,474 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.status.StatusLine (class must be instantiated by Interceptor)
+2023-07-11 09:19:25,614 INFO 	 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] (52):	 HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-11 09:19:25,632 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] (437):	 Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-11 09:19:28,962 INFO 	 org.springframework.boot.StartupInfoLogger [main] (61):	 Started AlmMapperApplicationTests in 7.887 seconds (JVM running for 8.679)
+2023-07-11 09:19:29,193 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] (651):	 Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-11 09:19:29,198 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (350):	 alm-db - Shutdown initiated...
+2023-07-11 09:19:29,214 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (352):	 alm-db - Shutdown completed.
+2023-07-11 09:20:00,244 INFO 	 org.springframework.boot.StartupInfoLogger [main] (55):	 Starting AlmMapperApplicationTests using Java 11.0.19 on LAP-DELL5520-02 with PID 8664 (started by Hauke in C:\Users\hauke.AD\alm_hack2build\dev\merge)
+2023-07-11 09:20:00,245 DEBUG 	 org.springframework.boot.StartupInfoLogger [main] (56):	 Running with Spring Boot v2.5.6, Spring v5.3.12
+2023-07-11 09:20:00,246 INFO 	 org.springframework.boot.SpringApplication [main] (663):	 The following profiles are active: prod
+2023-07-11 09:20:00,257 INFO 	 org.hibernate.validator.internal.util.Version [background-preinit] (21):	 HV000001: Hibernate Validator 6.2.0.Final
+2023-07-11 09:20:01,047 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (132):	 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-11 09:20:01,084 INFO 	 org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] (201):	 Finished Spring Data repository scanning in 32 ms. Found 1 JPA repository interfaces.
+2023-07-11 09:20:01,617 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Flyway Community Edition 7.7.3 by Redgate
+2023-07-11 09:20:01,630 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (110):	 alm-db - Starting...
+2023-07-11 09:20:01,730 INFO 	 com.zaxxer.hikari.HikariDataSource [main] (123):	 alm-db - Start completed.
+2023-07-11 09:20:01,751 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Database: jdbc:mariadb://127.0.0.1:3307/alm-db (MariaDB 11.0)
+2023-07-11 09:20:01,768 WARN 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (53):	 Flyway upgrade recommended: org.flywaydb.core.internal.database.mysql.mariadb.MariaDBDatabaseType@1de5cc88 11.0 is newer than this version of Flyway and support has not been tested. The latest supported version of org.flywaydb.core.internal.database.mysql.mariadb.MariaDBDatabaseType@1de5cc88 is 10.5.
+2023-07-11 09:20:01,800 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Successfully validated 4 migrations (execution time 00:00.020s)
+2023-07-11 09:20:01,811 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Current version of schema `alm-db`: 4
+2023-07-11 09:20:01,813 INFO 	 org.flywaydb.core.internal.logging.slf4j.Slf4jLog [main] (49):	 Schema `alm-db` is up to date. No migration necessary.
+2023-07-11 09:20:02,010 INFO 	 org.hibernate.jpa.internal.util.LogHelper [main] (31):	 HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-11 09:20:02,060 INFO 	 org.hibernate.Version [main] (44):	 HHH000412: Hibernate ORM core version 5.4.32.Final
+2023-07-11 09:20:02,246 INFO 	 org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] (56):	 HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-07-11 09:20:02,820 INFO 	 org.hibernate.dialect.Dialect [main] (175):	 HHH000400: Using dialect: org.hibernate.dialect.MariaDB103Dialect
+2023-07-11 09:20:03,682 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.calm.CalmProcess (class must be instantiated by Interceptor)
+2023-07-11 09:20:03,740 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.abap.AbapProcess (class must be instantiated by Interceptor)
+2023-07-11 09:20:03,757 INFO 	 org.hibernate.tuple.PojoInstantiator [main] (47):	 HHH000182: No default (no-argument) constructor for class: com.ridonit.alm.mapper.status.StatusLine (class must be instantiated by Interceptor)
+2023-07-11 09:20:03,904 INFO 	 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] (52):	 HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-11 09:20:03,913 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] (437):	 Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-11 09:20:07,208 INFO 	 org.springframework.boot.StartupInfoLogger [main] (61):	 Started AlmMapperApplicationTests in 7.278 seconds (JVM running for 8.054)
+2023-07-11 09:20:07,476 INFO 	 org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] (651):	 Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-11 09:20:07,479 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (350):	 alm-db - Shutdown initiated...
+2023-07-11 09:20:07,497 INFO 	 com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] (352):	 alm-db - Shutdown completed.
