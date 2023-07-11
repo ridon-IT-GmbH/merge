@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ridonit</groupId>
-    <artifactId>alm-mapper</artifactId>
+    <artifactId>cloud-alm-mapper</artifactId>
     <version>0.0.1</version>
     <name>alm-mapper</name>
     <description>alm-mapper</description>
@@ -113,6 +113,18 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>3.0.0</version>
+        </dependency>
+
+        <!-- SPECIALS -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.clerezza.ext</groupId>
+            <artifactId>org.json.simple</artifactId>
+            <version>0.4</version>
         </dependency>
 
         <!-- TESTING -->
