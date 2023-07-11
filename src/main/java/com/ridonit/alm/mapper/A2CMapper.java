@@ -1,5 +1,30 @@
 package com.ridonit.alm.mapper;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.security.cert.CertificateException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -11,28 +36,17 @@ import com.ridonit.alm.mapper.abap.AbapProcess;
 import com.ridonit.alm.mapper.calm.CalmField;
 import com.ridonit.alm.mapper.calm.CalmProcess;
 import com.ridonit.alm.mapper.config.MappingConfig;
-import okhttp3.*;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.ridonit.alm.model.StatusConfig;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.security.cert.CertificateException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class A2CMapper {
 
+	private static final String FIRST = "FIRST";
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	private static final String REPLACE = "%REPLACE%";
 	private static final String API = "https://ridon-it-gmbh-cloudalm.authentication.eu10.hana.ondemand.com.eu10.alm.cloud.sap/api/";
@@ -86,18 +100,20 @@ public class A2CMapper {
 	}
 
 	private static String getInvolvedParties(AbapProcess proc) {
-		// TODO Auto-generated method stub
-		return "";
+		MappingConfig mc = getMappingConfig(proc, CalmField.INVOLVED_PARTIES);
+		return getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(), "ref_partner_no",
+				",");
 	}
 
 	private static String getAssigneeId(AbapProcess proc) {
-		// TODO Auto-generated method stub
-		return "";
+		MappingConfig mc = getMappingConfig(proc, CalmField.RESPONSIBLE_ID);
+		return getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(), "ref_partner_no",
+				",");
 	}
 
 	private static String getWorkstream(AbapProcess proc) {
-		// TODO Auto-generated method stub
-		return "";
+		MappingConfig mc = getMappingConfig(proc, CalmField.WORKSTREAM);
+		return proc.getJsonMap().getOrDefault(mc.getAbapTable() + "." + mc.getAbapKey(), "");
 	}
 
 	private static String getPriorityId(AbapProcess proc) {
@@ -106,27 +122,34 @@ public class A2CMapper {
 	}
 
 	private static String getSubStatus(AbapProcess proc) {
-		// TODO Auto-generated method stub
-		return "";
+		ArrayList<StatusConfig> statusConfigList = new ArrayList<>();
+		for (StatusConfig conf : statusConfigList) {
+//			if (conf.getTransactionTypeConfig().getAbapTransaction().equals(proc.getProcessType())) {
+//				
+//				getAbapTableValue(proc, "status[" + REPLACE + "]", "status",conf.getAbapStatus(), "status",
+//						FIRST);
+//			}
+		}
+		return getAbapTableValue(proc, "status[" + REPLACE + "]", "status", "E0001", "status", FIRST);
 	}
 
 	private static String getScopeName(AbapProcess proc) {
-		// TODO Auto-generated method stub
+
 		return "";
 	}
 
 	private static String getDescription(AbapProcess proc) {
-		MappingConfig mc = getMappingConfig(proc,CalmField.DESCRIPTION);
-		getAbapTableValue(proc, "rich_texts.data[" + REPLACE + "]", "text_id", mc.getAbapKey(), "text_content", LINE_SEPARATOR);
-		return null;
+		MappingConfig mc = getMappingConfig(proc, CalmField.DESCRIPTION);
+		return getAbapTableValue(proc, "rich_texts.data[" + REPLACE + "]", "text_id", mc.getAbapKey(), "text_content",
+				LINE_SEPARATOR);
 	}
 
 	private static String getTitle(AbapProcess proc) {
-		return proc.getJsonMap().get("orderadm_h.description");
+		return proc.getJsonMap().getOrDefault("orderadm_h.description", "");
 	}
 
 	private static String getCalmId(AbapProcess proc) {
-		return proc.getJsonMap().get("customer_h.zz_alm_id");
+		return proc.getJsonMap().getOrDefault("customer_h.zz_alm_id", "");
 	}
 
 	private static String getAbapTableValue(AbapProcess proc, String abapPath, String keyPath, String keyValue,
@@ -138,12 +161,14 @@ public class A2CMapper {
 			String keyString = abapPath.replace(REPLACE, String.valueOf(i));
 			String keyValuePath = keyString + "." + keyPath;
 			if (proc.getJsonMap().containsKey(keyValuePath)) {
-				if (keyValue.equals(proc.getJsonMap().get(keyValuePath)))
+				if (keyValue.equals(proc.getJsonMap().get(keyValuePath))) {
 					if (!returnString.isEmpty()) {
 						returnString += concatString;
 					}
-				String contentValuePath = keyString + "." + contentValue;
-				returnString += proc.getJsonMap().get(contentValuePath);
+					String contentValuePath = keyString + "." + contentValue;
+					returnString += proc.getJsonMap().get(contentValuePath);
+					cont = !FIRST.equals(concatString);
+				}
 			} else {
 				cont = false;
 			}
@@ -158,18 +183,18 @@ public class A2CMapper {
 		return null;
 	}
 
-	private static MappingConfig getMappingConfig(AbapProcess proc,CalmField calmField) {
+	private static MappingConfig getMappingConfig(AbapProcess proc, CalmField calmField) {
 		MappingConfig mc = null;
-		switch(calmField) {
-		  case DESCRIPTION:
-			  mc = new MappingConfig(null, "rich_texts", "ZIR4", CalmField.DESCRIPTION.getTechnicalName());
-		    break;
-		  default:
-		    // code block
+		switch (calmField) {
+		case DESCRIPTION:
+			mc = new MappingConfig(null, "rich_texts", "ZIR4", CalmField.DESCRIPTION.getTechnicalName());
+			break;
+		default:
+			mc = new MappingConfig(null, "", "", CalmField.DESCRIPTION.getTechnicalName());
 		}
 		return mc;
 	}
-	
+
 	public static void pushToCloud(CalmProcess calmProc) {
 		// TODO BERND Auto-generated method stub
 		try {
