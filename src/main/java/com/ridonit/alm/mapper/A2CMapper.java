@@ -48,6 +48,7 @@ import com.ridonit.alm.service.MapperConfigService;
 import com.ridonit.alm.service.StatusConfigService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -56,6 +57,7 @@ import okhttp3.Response;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class A2CMapper {
 
 	private static final String FIRST = "FIRST";
@@ -119,22 +121,34 @@ public class A2CMapper {
 	}
 
 	private String getInvolvedParties(AbapProcess proc) {
+		String returnString = "";
 		MappingConfig mc = getMappingConfig(proc, CalmField.INVOLVED_PARTIES);
-		return getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(), "ref_partner_no",
-				FIRST);
+		if (mc != null) {
+			returnString = getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(),
+					"ref_partner_no", FIRST);
+		}
+		return returnString;
 	}
 
 	private String getAssigneeId(AbapProcess proc) {
+		String returnString = "";
 		MappingConfig mc = getMappingConfig(proc, CalmField.RESPONSIBLE_ID);
-		return getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(), "ref_partner_no",
-				FIRST);
+		if (mc != null) {
+			returnString = getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(),
+					"ref_partner_no", FIRST);
+		}
+		return returnString;
 	}
 
 	private String getWorkstream(AbapProcess proc) {
+		String returnString = "";
 		MappingConfig mc = getMappingConfig(proc, CalmField.WORKSTREAM);
-		String abapBp = getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(),
-				"ref_partner_no", FIRST);
-		return getMappedBp(proc, abapBp);
+		if (mc != null) {
+			String abapBp = getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(),
+					"ref_partner_no", FIRST);
+			returnString = getMappedBp(proc, abapBp);
+		}
+		return returnString;
 	}
 
 	private String getMappedBp(AbapProcess proc, String abapBp) {
@@ -148,11 +162,16 @@ public class A2CMapper {
 			}
 		}
 		return returnString;
+
 	}
 
 	private String getPriorityId(AbapProcess proc) {
+		String returnString = "";
 		MappingConfig mc = getMappingConfig(proc, CalmField.PRIORITY);
-		return proc.getJsonMap().getOrDefault(mc.getAbapTable() + "." + mc.getAbapKey(), "");
+		if (mc != null) {
+			returnString = proc.getJsonMap().getOrDefault(mc.getAbapTable() + "." + mc.getAbapKey(), "");
+		}
+		return returnString;
 	}
 
 	private String getSubStatus(AbapProcess proc) {
@@ -187,19 +206,26 @@ public class A2CMapper {
 	}
 
 	private String getDescription(AbapProcess proc) {
+		String returnString = "";
 		MappingConfig mc = getMappingConfig(proc, CalmField.TEXT);
-		return getAbapTableValue(proc, "rich_texts.data[" + REPLACE + "]", "text_id", mc.getAbapKey(), "text_content",
-				LINE_SEPARATOR);
+		if (mc != null) {
+			returnString = getAbapTableValue(proc, "rich_texts.data[" + REPLACE + "]", "text_id", mc.getAbapKey(),
+					"text_content", LINE_SEPARATOR);
+		}
+		return returnString;
 	}
 
-	private  String getTitle(AbapProcess proc) {
-		MappingConfig mc = getMappingConfig(proc, CalmField.TEXT);
-		return proc.getJsonMap().getOrDefault(mc.getAbapTable() + "."  + mc.getAbapKey(), "");
+	private String getTitle(AbapProcess proc) {
+		String returnString = "";
+		MappingConfig mc = getMappingConfig(proc, CalmField.DESCRIPTION);
+		if (mc != null) {
+			returnString = proc.getJsonMap().getOrDefault(mc.getAbapTable() + "." + mc.getAbapKey(), "");
+		}
+		return returnString;
 	}
 
-	private  String getCalmId(AbapProcess proc) {
-		MappingConfig mc = getMappingConfig(proc, CalmField.TEXT);
-		return proc.getJsonMap().getOrDefault(mc.getAbapTable()+ "." + mc.getAbapKey(), "");
+	private String getCalmId(AbapProcess proc) {
+		return proc.getJsonMap().getOrDefault("customer_h.zz_alm_id", "");
 	}
 
 	private static String getAbapTableValue(AbapProcess proc, String abapPath, String keyPath, String keyValue,
@@ -211,7 +237,7 @@ public class A2CMapper {
 			String keyString = abapPath.replace(REPLACE, String.valueOf(i));
 			String keyValuePath = keyString + "." + keyPath;
 			if (proc.getJsonMap().containsKey(keyValuePath)) {
-				if (keyValue.equals(proc.getJsonMap().get(keyValuePath))) {
+				if (keyValue != null && keyValue.equals(proc.getJsonMap().get(keyValuePath))) {
 					if (!returnString.isEmpty()) {
 						returnString += concatString;
 					}
@@ -229,16 +255,25 @@ public class A2CMapper {
 	}
 
 	private MappingConfig getMappingConfig(AbapProcess proc, CalmField calmField) {
-		List<MapperConfg> fullConf = mpcConfig.findAll();
-		List<MapperConfg> filtered = fullConf.stream()
-				.filter(mpc -> mpc.getTransactionTypeConfig().getAbapTransaction().equalsIgnoreCase(proc.getProcessType())).collect(Collectors.toList());
-		MapperConfg conf = filtered
-		.stream()
-        .filter(mpc -> calmField.getTechnicalName().equalsIgnoreCase(mpc.getCalmField().getTechnicalName()))
-        .reduce((a, b) -> {
-            throw new IllegalStateException("Multiple elements: " + a + ", " + b);
-        }).get();
-		return new MappingConfig(null, conf.getAbapType().getTechnicalName().toLowerCase(), conf.getAbapKey(), calmField.getTechnicalName());
+		MappingConfig mc = null;
+		try {
+			List<MapperConfg> fullConf = mpcConfig.findAll();
+			List<MapperConfg> filtered = fullConf.stream().filter(
+					mpc -> mpc.getTransactionTypeConfig().getAbapTransaction().equalsIgnoreCase(proc.getProcessType()))
+					.collect(Collectors.toList());
+			MapperConfg conf = filtered.stream()
+					.filter(mpc -> calmField.getTechnicalName().equalsIgnoreCase(mpc.getCalmField().getTechnicalName()))
+					.reduce((a, b) -> {
+						throw new IllegalStateException("Multiple elements: " + a + ", " + b);
+					}).get();
+			mc = new MappingConfig(null, conf.getAbapType().getTechnicalName(), conf.getAbapKey(),
+					conf.getCalmField().getTechnicalName());
+		} catch (Exception e) {
+			log.error("No Mapping found for calmField {} - proctype {}", calmField.getTechnicalName(),
+					proc.getProcessType());
+//			mc = new MappingConfig(null, "", "", calmField.getTechnicalName());
+		}
+		return mc;
 	}
 
 	public static void pushToCloud(CalmProcess calmProc) {
