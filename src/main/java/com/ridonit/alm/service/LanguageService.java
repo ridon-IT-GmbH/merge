@@ -1,4 +1,4 @@
-package com.ridonit.alm.Service;
+package com.ridonit.alm.service;
 
 import com.google.common.collect.Lists;
 import com.ridonit.alm.model.Language;
