@@ -1,4 +1,4 @@
-package com.ridonit.alm.Service;
+package com.ridonit.alm.service;
 
 import java.util.List;
 
