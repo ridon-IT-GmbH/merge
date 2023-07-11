@@ -1,6 +1,6 @@
 package com.ridonit.alm.controller;
 
-import com.ridonit.alm.Service.LanguageService;
+import com.ridonit.alm.service.LanguageService;
 import com.ridonit.alm.model.Language;
 import com.ridonit.alm.payload.LanguageDto;
 import lombok.RequiredArgsConstructor;

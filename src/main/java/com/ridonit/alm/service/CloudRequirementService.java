@@ -1,4 +1,4 @@
-package com.ridonit.alm.Service;
+package com.ridonit.alm.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ridonit.alm.model.CloudRequirement;
