@@ -20,7 +20,7 @@ public class BpMapping {
     @Version
     private Integer version;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "transaction_type_config_id")
     private TransactionTypeConfig transactionTypeConfig;
 

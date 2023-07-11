@@ -10,10 +10,10 @@ public class C2AWatcher {
 	 
 
 	public void createThread(long refreshTime, String threadName) {
-		log.warn("start thread .... " + threadName);
-		runnable = new RunnableReader(threadName, refreshTime);
-		runnable.start();
-		log.warn("thread started: " + threadName);
+//		log.warn("start thread .... " + threadName);
+//		runnable = new RunnableReader(threadName, refreshTime);
+//		runnable.start();
+//		log.warn("thread started: " + threadName);
 	}
 
 	public void closeThreads() {

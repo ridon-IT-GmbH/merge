@@ -24,7 +24,7 @@ public class TransactionTypeConfig {
     @Column(length = 10)
     private String abapTransaction;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "calm_field_id")
     private CalmField calmField;
 

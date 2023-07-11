@@ -20,18 +20,18 @@ public class StatusConfig {
     @Version
     private Integer version;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "transaction_type_config_id")
     private TransactionTypeConfig transactionTypeConfig;
 
     @Column
     private String abapStatus;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "calm_status_id")
     private CalmStatus calmStatus;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "update_type_id")
     private UpdateType updateType;
 }

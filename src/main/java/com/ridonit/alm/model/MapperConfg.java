@@ -20,15 +20,15 @@ public class MapperConfg {
     @Version
     private Integer version;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "transaction_type_config_id")
     private TransactionTypeConfig transactionTypeConfig;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "abap_type_id")
     private AbapType abapType;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "calm_field_id")
     private CalmField calmField;
 

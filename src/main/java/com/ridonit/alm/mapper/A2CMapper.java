@@ -9,12 +9,13 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.cert.CertificateException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -24,6 +25,7 @@ import javax.net.ssl.X509TrustManager;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,18 +34,28 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ValueNode;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.ridonit.alm.Service.BpMappingService;
+import com.ridonit.alm.Service.MapperConfigService;
+import com.ridonit.alm.Service.StatusConfigService;
 import com.ridonit.alm.mapper.abap.AbapProcess;
 import com.ridonit.alm.mapper.calm.CalmField;
 import com.ridonit.alm.mapper.calm.CalmProcess;
 import com.ridonit.alm.mapper.config.MappingConfig;
+import com.ridonit.alm.model.BpMapping;
+import com.ridonit.alm.model.MapperConfg;
 import com.ridonit.alm.model.StatusConfig;
+import com.ridonit.alm.model.TransactionTypeConfig;
+import com.ridonit.alm.model.UpdateType;
 
+import lombok.RequiredArgsConstructor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+@Component
+@RequiredArgsConstructor
 public class A2CMapper {
 
 	private static final String FIRST = "FIRST";
@@ -52,28 +64,35 @@ public class A2CMapper {
 	private static final String API = "https://ridon-it-gmbh-cloudalm.authentication.eu10.hana.ondemand.com.eu10.alm.cloud.sap/api/";
 	private static final String TASKS = API + "calm-tasks/v1/tasks/";
 
+	private final StatusConfigService statusConfig;
+	private final BpMappingService bpMapping;
+	private final MapperConfigService mpcConfig;
+
 	/**
 	 * als API exposen
 	 * 
 	 * @param json
 	 */
-	public static void updateCloudALM(String json) {
+	public void updateCloudALM(String json) {
 		Map<String, String> jsonMap = jsonToMap(json);
-
+		String procId = jsonMap.get("process_type");
 		AbapProcess proc = new AbapProcess(null, null, null, null, null, jsonMap);
-//		if (isStatusA2C(proc)) {
-		CalmProcess calmProc = mapA2C(proc);
-		pushToCloud(calmProc);
-//		}
+		proc.setProcessType(procId);
+		if (isStatusA2C(proc)) {
+			CalmProcess calmProc = mapA2C(proc);
+			pushToCloud(calmProc);
+		}
 	}
 
-	private static boolean isStatusA2C(AbapProcess proc) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean isStatusA2C(AbapProcess proc) {
+		List<StatusConfig> statusConfigList = statusConfig.findAll();
+		String returnString = getActiveStatus(proc, statusConfigList);
+		return !returnString.isBlank();
 	}
 
-	private static CalmProcess mapA2C(AbapProcess proc) {
+	private CalmProcess mapA2C(AbapProcess proc) {
 		String calmId = getCalmId(proc);
+		proc.setCalmId(calmId);
 		String title = getTitle(proc);
 		String description = getDescription(proc);
 		String scopeName = getScopeName(proc);
@@ -99,38 +118,67 @@ public class A2CMapper {
 		return null;
 	}
 
-	private static String getInvolvedParties(AbapProcess proc) {
+	private String getInvolvedParties(AbapProcess proc) {
 		MappingConfig mc = getMappingConfig(proc, CalmField.INVOLVED_PARTIES);
 		return getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(), "ref_partner_no",
-				",");
+				FIRST);
 	}
 
-	private static String getAssigneeId(AbapProcess proc) {
+	private String getAssigneeId(AbapProcess proc) {
 		MappingConfig mc = getMappingConfig(proc, CalmField.RESPONSIBLE_ID);
 		return getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(), "ref_partner_no",
-				",");
+				FIRST);
 	}
 
-	private static String getWorkstream(AbapProcess proc) {
+	private String getWorkstream(AbapProcess proc) {
 		MappingConfig mc = getMappingConfig(proc, CalmField.WORKSTREAM);
+		String abapBp = getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(),
+				"ref_partner_no", FIRST);
+		return getMappedBp(proc, abapBp);
+	}
+
+	private String getMappedBp(AbapProcess proc, String abapBp) {
+		List<BpMapping> bpList = bpMapping.findAll();
+		String returnString = "";
+		for (BpMapping bp : bpList) {
+			if (proc.getProcessType().equals(bp.getTransactionTypeConfig().getAbapTransaction())
+					&& abapBp.equals(bp.getAbapBp())) {
+				returnString = bp.getCalmBp();
+				break;
+			}
+		}
+		return returnString;
+	}
+
+	private String getPriorityId(AbapProcess proc) {
+		MappingConfig mc = getMappingConfig(proc, CalmField.PRIORITY);
 		return proc.getJsonMap().getOrDefault(mc.getAbapTable() + "." + mc.getAbapKey(), "");
 	}
 
-	private static String getPriorityId(AbapProcess proc) {
-		// TODO Auto-generated method stub
-		return "";
+	private String getSubStatus(AbapProcess proc) {
+		List<StatusConfig> statusConfigList = statusConfig.findAll();
+		String returnString = getActiveStatus(proc, statusConfigList);
+//		String returnString = getAbapTableValue(proc, "status[" + REPLACE + "]", "status", "E0001", "status", FIRST);
+		return returnString;
 	}
 
-	private static String getSubStatus(AbapProcess proc) {
-		ArrayList<StatusConfig> statusConfigList = new ArrayList<>();
+	private static String getActiveStatus(AbapProcess proc, List<StatusConfig> statusConfigList) {
+		String returnString = "";
 		for (StatusConfig conf : statusConfigList) {
-//			if (conf.getTransactionTypeConfig().getAbapTransaction().equals(proc.getProcessType())) {
-//				
-//				getAbapTableValue(proc, "status[" + REPLACE + "]", "status",conf.getAbapStatus(), "status",
-//						FIRST);
-//			}
+			TransactionTypeConfig ttc = conf.getTransactionTypeConfig();
+			String tA = ttc.getAbapTransaction();
+			String processType = proc.getProcessType();
+			UpdateType updateType = conf.getUpdateType();
+			if (tA.equals(processType) && "A2C".equals(updateType.getTechnicalName())) {
+				returnString = getAbapTableValue(proc, "status[" + REPLACE + "]", "status", conf.getAbapStatus(),
+						"status", FIRST);
+				if (!returnString.isBlank()) {
+					returnString = conf.getCalmStatus().getTechnicalName();
+					break;
+				}
+			}
 		}
-		return getAbapTableValue(proc, "status[" + REPLACE + "]", "status", "E0001", "status", FIRST);
+		return returnString;
 	}
 
 	private static String getScopeName(AbapProcess proc) {
@@ -138,18 +186,20 @@ public class A2CMapper {
 		return "";
 	}
 
-	private static String getDescription(AbapProcess proc) {
-		MappingConfig mc = getMappingConfig(proc, CalmField.DESCRIPTION);
+	private String getDescription(AbapProcess proc) {
+		MappingConfig mc = getMappingConfig(proc, CalmField.TEXT);
 		return getAbapTableValue(proc, "rich_texts.data[" + REPLACE + "]", "text_id", mc.getAbapKey(), "text_content",
 				LINE_SEPARATOR);
 	}
 
-	private static String getTitle(AbapProcess proc) {
-		return proc.getJsonMap().getOrDefault("orderadm_h.description", "");
+	private  String getTitle(AbapProcess proc) {
+		MappingConfig mc = getMappingConfig(proc, CalmField.TEXT);
+		return proc.getJsonMap().getOrDefault(mc.getAbapTable() + "."  + mc.getAbapKey(), "");
 	}
 
-	private static String getCalmId(AbapProcess proc) {
-		return proc.getJsonMap().getOrDefault("customer_h.zz_alm_id", "");
+	private  String getCalmId(AbapProcess proc) {
+		MappingConfig mc = getMappingConfig(proc, CalmField.TEXT);
+		return proc.getJsonMap().getOrDefault(mc.getAbapTable()+ "." + mc.getAbapKey(), "");
 	}
 
 	private static String getAbapTableValue(AbapProcess proc, String abapPath, String keyPath, String keyValue,
@@ -178,21 +228,17 @@ public class A2CMapper {
 		return returnString;
 	}
 
-	private static String getMappedCloudBP(String val) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private static MappingConfig getMappingConfig(AbapProcess proc, CalmField calmField) {
-		MappingConfig mc = null;
-		switch (calmField) {
-		case DESCRIPTION:
-			mc = new MappingConfig(null, "rich_texts", "ZIR4", CalmField.DESCRIPTION.getTechnicalName());
-			break;
-		default:
-			mc = new MappingConfig(null, "", "", CalmField.DESCRIPTION.getTechnicalName());
-		}
-		return mc;
+	private MappingConfig getMappingConfig(AbapProcess proc, CalmField calmField) {
+		List<MapperConfg> fullConf = mpcConfig.findAll();
+		List<MapperConfg> filtered = fullConf.stream()
+				.filter(mpc -> mpc.getTransactionTypeConfig().getAbapTransaction().equalsIgnoreCase(proc.getProcessType())).collect(Collectors.toList());
+		MapperConfg conf = filtered
+		.stream()
+        .filter(mpc -> calmField.getTechnicalName().equalsIgnoreCase(mpc.getCalmField().getTechnicalName()))
+        .reduce((a, b) -> {
+            throw new IllegalStateException("Multiple elements: " + a + ", " + b);
+        }).get();
+		return new MappingConfig(null, conf.getAbapType().getTechnicalName().toLowerCase(), conf.getAbapKey(), calmField.getTechnicalName());
 	}
 
 	public static void pushToCloud(CalmProcess calmProc) {
@@ -259,8 +305,8 @@ public class A2CMapper {
 		jsonObject.addProperty("scopeId", calmProc.getScopeName());
 		jsonObject.addProperty("subStatus", calmProc.getSubStatus());
 		jsonObject.addProperty("priorityId", calmProc.getPriorityId());
-		jsonObject.addProperty("startDate", cloudFormat(calmProc.getStartDate()));
-		jsonObject.addProperty("dueDate", cloudFormat(calmProc.getDueDate()));
+//		jsonObject.addProperty("startDate", cloudFormat(calmProc.getStartDate()));
+//		jsonObject.addProperty("dueDate", cloudFormat(calmProc.getDueDate()));
 		jsonObject.addProperty("workstream", calmProc.getWorkstream());
 		jsonObject.addProperty("assigneeId", calmProc.getAssigneeId());
 		jsonObject.addProperty("involvedParties", calmProc.getInvolvedParties());
