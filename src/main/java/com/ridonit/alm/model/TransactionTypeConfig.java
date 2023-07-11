@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,6 +27,18 @@ public class TransactionTypeConfig {
     @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "calm_field_id")
     private CalmField calmField;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "transaction_type_config_id")
+    private List<BpMapping> bpMappingList;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "transaction_type_config_id")
+    private List<MapperConfg> mapperConfigList;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "transaction_type_config_id")
+    private List<StatusConfig> statusConfigsList;
 
     @Column
     private String calmValue;

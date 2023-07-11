@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MapperConfig {
+public class MapperConfg {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -31,4 +31,7 @@ public class MapperConfig {
     @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "calm_field_id")
     private CalmField calmField;
+
+    @Column
+    private String abapKey;
 }
