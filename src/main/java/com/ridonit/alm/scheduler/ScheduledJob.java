@@ -23,19 +23,11 @@ public class ScheduledJob {
     private final SapCloudClient cloudClient;
     private final C2AMapper mapper;
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 60000)
     public void getCloudRequirements() throws Exception {
         String cloudJsonString = cloudClient.getJsonStringFromCloud();
+        mapper.getModifiedProcesses(cloudJsonString);
         log.info(cloudJsonString);
     }
 
-
-    @Scheduled(fixedDelay = 600000)
-    public void runAndTalkAboutIt() throws Exception {
-        List<Language> languages = service.findAll();
-        log.info("i am running");
-        for(Language lang : languages) {
-            log.info("i love " + lang.getLanguageLong());
-        }
-    }
 }

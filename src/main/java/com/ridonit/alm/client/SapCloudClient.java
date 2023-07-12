@@ -15,12 +15,14 @@ import java.net.URL;
 @Component
 @Slf4j
 public class SapCloudClient {
+
     final String AUTH_URL = "https://ridon-it-gmbh-cloudalm.authentication.eu10.hana.ondemand.com/oauth/token";
     final String CLIENT_ID = "sb-CALMExtensionAPI!b155059|sapcloudalm!b16907";
     final String CLIENT_SECRET = "iNA2jK89j+anYdw0hCCiKKca5bw=";
     final String URI = "https://ridon-it-gmbh-cloudalm.authentication.eu10.hana.ondemand.com.eu10.alm.cloud.sap/api/calm-tasks/v1/tasks?type=CALMREQU&projectId=39333c82-86e9-420a-83d9-606336f2f6ce";
     final int BLOCK_SIZE = 1024;
     final int BUFFER_SIZE = 8 * BLOCK_SIZE;
+
     public String getJsonStringFromCloud() throws Exception {
         String token = TokenProvider.getToken(AUTH_URL, CLIENT_ID, CLIENT_SECRET);
         HostnameVerifier allHostsValid = new HostnameVerifier() {

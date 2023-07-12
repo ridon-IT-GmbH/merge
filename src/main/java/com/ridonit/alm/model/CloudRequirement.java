@@ -1,9 +1,6 @@
 package com.ridonit.alm.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,16 +10,19 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class CloudRequirement implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long requirementId;
 
     @Version
+    @EqualsAndHashCode.Exclude
     private Integer version;
 
-    @Column
     private String id;
 
     @Column

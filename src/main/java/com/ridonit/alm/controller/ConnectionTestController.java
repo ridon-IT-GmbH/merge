@@ -1,9 +1,12 @@
 package com.ridonit.alm.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
+import com.ridonit.alm.client.BackendClient;
 import com.ridonit.alm.client.RestClient;
 import com.ridonit.alm.client.SapCloudClient;
 import com.ridonit.alm.payload.*;
+import com.ridonit.alm.service.SolmanTransferDtoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.glassfish.jersey.internal.inject.Custom;
@@ -28,6 +31,9 @@ public class ConnectionTestController {
 
     private final RestClient restClient;
     private final SapCloudClient cloudClient;
+    private final SolmanTransferDtoService jsonService;
+    private final BackendClient backendClient;
+    private final ObjectMapper objectMapper;
 
     @GetMapping(value="/quick/{url}")
     public ResponseEntity<TestResponseDto> testing(@PathVariable("url") String url) throws Exception {
@@ -50,73 +56,22 @@ public class ConnectionTestController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping(value="/solman")
-    public ResponseEntity<String> testSolman() throws Exception {
-        String result = restClient.sendJson();
+    @GetMapping(value="/testSolmanJson/{almId}")
+    public ResponseEntity<SolmanTransferDto> testSolmanJsonSend(@PathVariable("almId") String almId) throws Exception {
+        SolmanTransferDto result = jsonService.getByAlmId(almId, "from testing by swagger without any ticket");
+        String jsonString2 = objectMapper.writeValueAsString(result);
+        //String jsonString = "{    \"AlmId\": \"11334354\",    \"Json\":    \"{    header:{    priority:1,    description:a description,    process_type:ZRIR    },    partners:[{    function:SMCD0006,    partner_no:374    },{    function:SMIR0001,    partner_no:375    }    ],    customers:[{    fieldname:ZZ_SNOW_NUMBER,    value:inc12345    },{    fieldname:ZZFLD000012,    value:883323    },{    fieldname:ZZ_ALM_ID,    value:74272    }    ],    rich_texts:[{    text_type:ZIR4,    content:ein langer und formatierter text    }    ]    }\"}";
+        String jsonString = "{    \"AlmId\": \"11334354\",    \"Json\":    \"{    \\\"header\\\":{    \\\"priority\\\":\\\"1\\\",    \\\"description\\\":\\\"a description\\\",    \\\"process_type\\\":\\\"ZRIR\\\"    },    \\\"partners\\\":[{    \\\"function\\\":\\\"SMCD0006\\\",    \\\"partner_no\\\":374    },{    \\\"function\\\":\\\"SMIR0001\\\",    \\\"partner_no\\\":375    }    ],    \\\"customers\\\":[{    \\\"fieldname\\\":\\\"ZZ_SNOW_NUMBER\\\",    \\\"value\\\":\\\"inc12345\\\"    },{    \\\"fieldname\\\":\\\"ZZFLD000012\\\",    \\\"value\\\":\\\"883323\\\"    },{    \\\"fieldname\\\":\\\"ZZ_ALM_ID\\\",    \\\"value\\\":\\\"74272\\\"    }    ],    \\\"rich_texts\\\":[{    \\\"text_type\\\":\\\"ZIR4\\\",    \\\"content\\\":\\\"ein langer und formatierter text\\\"    }    ]    }\"}";
 
+        String link = "https://ridon-it-gmbh-development-ridon-ridon-development-alm-p361f7ea6.cfapps.eu10.hana.ondemand.com/sap/opu/odata/RIDONIT/CALM_API_SRV/Cloud_ALM_APISet/";
+        backendClient.poster(jsonString, link);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping(value="/solmanjson")
-    public ResponseEntity<SolmanRequestDto> testSolmanJson() throws Exception {
-        SolmanRequestDto request = new SolmanRequestDto();
 
-        HeaderDto head = new HeaderDto();
-        head.setPriority("1");
-        head.setDescription("first json from java");
-        head.setProcessType("ZRIR");
-        request.setHeader(head);
-
-        List<PartnerDto> partners = Lists.newArrayList();
-        PartnerDto partner1 = new PartnerDto();
-        partner1.setFunction("00000001");
-        partner1.setPartnerNo("201");
-        partners.add(partner1);
-
-        PartnerDto partner2 = new PartnerDto();
-        partner2.setFunction("SMIR0001");
-        partner2.setPartnerNo("192");
-        partners.add(partner2);
-        request.setPartners(partners);
-
-
-        List<CustomerDto> cust = Lists.newArrayList();
-        CustomerDto cus1 = new CustomerDto();
-        cus1.setFieldname("ZZ_SNOW_NUMBER");
-        cus1.setValue("inc12345");
-        cust.add(cus1);
-
-        CustomerDto cus2 = new CustomerDto();
-        cus2.setFieldname("ZZ_ALM_ID");
-        cus2.setValue("883323");
-        cust.add(cus2);
-        request.setCustomers(cust);
-
-
-        List<TextDto> texts = Lists.newArrayList();
-        TextDto t1 = new TextDto();
-        t1.setTextType("ZIR4");
-        t1.setContent("ein langer und formatierter text");
-        texts.add(t1);
-
-        TextDto t2 = new TextDto();
-        t2.setTextType("ZIR4");
-        t2.setContent("ein langer und formatierter text");
-        texts.add(t2);
-        request.setRichTexts(texts);
-
-        List<TextDto> ntexts = Lists.newArrayList();
-        TextDto nt1 = new TextDto();
-        nt1.setTextType("ZIR4");
-        nt1.setContent("ein langer und formatierter text");
-        ntexts.add(nt1);
-
-        TextDto nt2 = new TextDto();
-        nt2.setTextType("ZIR4");
-        nt2.setContent("ein langer und formatierter text");
-        ntexts.add(nt2);
-        request.setTexts(ntexts);
-
-        return new ResponseEntity<>(request, HttpStatus.OK);
+    @GetMapping(value="/solmanjson/{almId}")
+    public ResponseEntity<SolmanTransferDto> testSolmanJson(@PathVariable("almId") String almId) throws Exception {
+        SolmanTransferDto result = jsonService.getByAlmId(almId, "from testing by swagger without any ticket");
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

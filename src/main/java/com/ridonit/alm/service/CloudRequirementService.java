@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.modelmapper.ModelMapper;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
+
 @Component
 @Slf4j
 @RequiredArgsConstructor
@@ -16,6 +19,14 @@ public class CloudRequirementService {
 
     private final CloudRequirementRepo requirementRepo;
     private final ModelMapper modelMapper;
+
+    public List<CloudRequirement> findAll() {
+        return requirementRepo.findAll();
+    }
+
+    public CloudRequirement findByCalmId(String calmId) {
+        return requirementRepo.findById(calmId).orElseThrow(() -> new EntityNotFoundException("cloud requirement not found"));
+    }
 
     public CloudRequirement saveRequirement(CloudRequirement cloudRequirement) {
         cloudRequirement = requirementRepo.save(cloudRequirement);
