@@ -444,4 +444,63 @@ public class A2CMapper {
 			map.put(currentPath, valueNode.asText());
 		}
 	}
+
+	public void createReferenceLink(String taskId, String name, String refUrl) {
+		try {
+			String url = TASKS + "/" + taskId + "/references";
+
+			// TrustManager, der alle Zertifikate akzeptiert
+			TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+				@Override
+				public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType)
+						throws CertificateException {
+				}
+
+				@Override
+				public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType)
+						throws CertificateException {
+				}
+
+				@Override
+				public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+					return new java.security.cert.X509Certificate[] {};
+				}
+			} };
+
+			// SSLContext mit dem TrustManager initialisieren
+			SSLContext sslContext = SSLContext.getInstance("TLS");
+			sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+
+			// SSL-Socket-Fabrik erstellen
+			SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+
+			OkHttpClient client = new OkHttpClient.Builder()
+					.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0])
+					.hostnameVerifier((hostname, session) -> true) // Hostname-�berpr�fung deaktivieren
+					.build();
+
+			JsonObject jsonObject;
+			jsonObject = new JsonObject();
+			jsonObject.addProperty("taskId", taskId);
+			jsonObject.addProperty("name", name);
+			jsonObject.addProperty("url", refUrl);
+
+			Gson gson = new Gson();
+			String jsonPayloadString = gson.toJson(jsonObject);
+
+			MediaType mediaType = MediaType.parse("application/json");
+			RequestBody body = RequestBody.create(mediaType, jsonPayloadString);
+			Request request = new Request.Builder().url(url).header("Authorization", "Bearer " + getToken())
+					.header("DataServiceVersion", "2.0").header("Accept", "application/json").post(body).build();
+
+			Response response = client.newCall(request).execute();
+			String responseBody = response.body().string();
+
+			// Print response
+			System.out.println(responseBody);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

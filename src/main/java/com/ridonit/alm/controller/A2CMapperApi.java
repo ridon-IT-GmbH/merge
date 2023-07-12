@@ -21,5 +21,10 @@ public class A2CMapperApi {
 	public void updateCloud(@RequestBody String json) {
 		mapper.updateCloudALM(json);
 	}
+	
+	@PostMapping("/createReference")
+	public void createReference(String taskId, String name, String url) {
+		mapper.createReferenceLink(taskId, name, url);
+	}
 
 }
