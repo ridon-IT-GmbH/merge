@@ -124,8 +124,9 @@ public class A2CMapper {
 		String returnString = "";
 		MappingConfig mc = getMappingConfig(proc, CalmField.INVOLVED_PARTIES);
 		if (mc != null) {
-			returnString = getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(),
+			String abapBp = getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(),
 					"ref_partner_no", FIRST);
+			returnString = getMappedBp(proc, abapBp);			
 		}
 		return returnString;
 	}
@@ -134,8 +135,9 @@ public class A2CMapper {
 		String returnString = "";
 		MappingConfig mc = getMappingConfig(proc, CalmField.RESPONSIBLE_ID);
 		if (mc != null) {
-			returnString = getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(),
+			String abapBp = getAbapTableValue(proc, "partner[" + REPLACE + "]", "ref_partner_fct", mc.getAbapKey(),
 					"ref_partner_no", FIRST);
+			returnString = getMappedBp(proc, abapBp);
 		}
 		return returnString;
 	}
