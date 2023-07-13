@@ -58,7 +58,7 @@ public class ConnectionTestController {
 
     @GetMapping(value="/testSolmanJson/{almId}")
     public ResponseEntity<SolmanTransferDto> testSolmanJsonSend(@PathVariable("almId") String almId) throws Exception {
-        SolmanTransferDto result = jsonService.getByAlmId(almId, "from testing by swagger without any ticket");
+        SolmanTransferDto result = jsonService.getByAlmId(almId, null);
         String jsonString2 = objectMapper.writeValueAsString(result);
         //String jsonString = "{    \"AlmId\": \"11334354\",    \"Json\":    \"{    header:{    priority:1,    description:a description,    process_type:ZRIR    },    partners:[{    function:SMCD0006,    partner_no:374    },{    function:SMIR0001,    partner_no:375    }    ],    customers:[{    fieldname:ZZ_SNOW_NUMBER,    value:inc12345    },{    fieldname:ZZFLD000012,    value:883323    },{    fieldname:ZZ_ALM_ID,    value:74272    }    ],    rich_texts:[{    text_type:ZIR4,    content:ein langer und formatierter text    }    ]    }\"}";
         String jsonString = "{    \"AlmId\": \"11334354\",    \"Json\":    \"{    \\\"header\\\":{    \\\"priority\\\":\\\"1\\\",    \\\"description\\\":\\\"a description\\\",    \\\"process_type\\\":\\\"ZRIR\\\"    },    \\\"partners\\\":[{    \\\"function\\\":\\\"SMCD0006\\\",    \\\"partner_no\\\":374    },{    \\\"function\\\":\\\"SMIR0001\\\",    \\\"partner_no\\\":375    }    ],    \\\"customers\\\":[{    \\\"fieldname\\\":\\\"ZZ_SNOW_NUMBER\\\",    \\\"value\\\":\\\"inc12345\\\"    },{    \\\"fieldname\\\":\\\"ZZFLD000012\\\",    \\\"value\\\":\\\"883323\\\"    },{    \\\"fieldname\\\":\\\"ZZ_ALM_ID\\\",    \\\"value\\\":\\\"74272\\\"    }    ],    \\\"rich_texts\\\":[{    \\\"text_type\\\":\\\"ZIR4\\\",    \\\"content\\\":\\\"ein langer und formatierter text\\\"    }    ]    }\"}";
@@ -71,7 +71,7 @@ public class ConnectionTestController {
 
     @GetMapping(value="/solmanjson/{almId}")
     public ResponseEntity<SolmanTransferDto> testSolmanJson(@PathVariable("almId") String almId) throws Exception {
-        SolmanTransferDto result = jsonService.getByAlmId(almId, "from testing by swagger without any ticket");
+        SolmanTransferDto result = jsonService.getByAlmId(almId, null);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

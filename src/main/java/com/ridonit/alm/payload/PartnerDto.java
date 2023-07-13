@@ -8,5 +8,5 @@ import lombok.Data;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PartnerDto {
     private String function;
-    private String partnerNo;
+    private Integer partnerNo;
 }

@@ -41,10 +41,10 @@ public class CloudRequirement implements Serializable {
     private String externalId;
 
     @Column
-    private String startDate;
+    private String startdate;
 
     @Column
-    private String dueDate;
+    private String duedate;
 
     @Column
     private Long priorityId;

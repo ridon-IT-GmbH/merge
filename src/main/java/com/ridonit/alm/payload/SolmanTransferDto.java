@@ -10,5 +10,5 @@ public class SolmanTransferDto {
     private String almId;
 
     @JsonProperty("Json")
-    private SolmanRequestDto json;
+    private String json;
 }

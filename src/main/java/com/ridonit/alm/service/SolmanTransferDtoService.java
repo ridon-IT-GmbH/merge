@@ -1,6 +1,8 @@
 package com.ridonit.alm.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
+import com.ridonit.alm.model.CloudRequirement;
 import com.ridonit.alm.payload.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,7 +13,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SolmanTransferDtoService {
 
-    public SolmanTransferDto getByAlmId(String almId, String jsonText) {
+    private final ObjectMapper objectMapper;
+
+    public SolmanTransferDto getByAlmId(String almId, CloudRequirement req) throws Exception {
         SolmanTransferDto request = new SolmanTransferDto();
         request.setAlmId(almId);
 
@@ -19,19 +23,19 @@ public class SolmanTransferDtoService {
 
         HeaderDto head = new HeaderDto();
         head.setPriority("1");
-        head.setDescription("new Ticket for CloudAlmTicket: " + almId);
+        head.setDescription(req.getTitle());
         head.setProcessType("ZRIR");
         solmanReq.setHeader(head);
 
         List<PartnerDto> partners = Lists.newArrayList();
         PartnerDto partner1 = new PartnerDto();
-        partner1.setFunction("00000001");
-        partner1.setPartnerNo("201");
+        partner1.setFunction("SMIR0001");
+        partner1.setPartnerNo(192);
         partners.add(partner1);
 
         PartnerDto partner2 = new PartnerDto();
-        partner2.setFunction("SMIR0001");
-        partner2.setPartnerNo("192");
+        partner2.setFunction("SMCD0006");
+        partner2.setPartnerNo(374);
         partners.add(partner2);
         solmanReq.setPartners(partners);
 
@@ -44,7 +48,7 @@ public class SolmanTransferDtoService {
 
         CustomerDto cus2 = new CustomerDto();
         cus2.setFieldname("ZZ_ALM_ID");
-        cus2.setValue("883323");
+        cus2.setValue(req.getId());
         cust.add(cus2);
         solmanReq.setCustomers(cust);
 
@@ -52,28 +56,13 @@ public class SolmanTransferDtoService {
         List<TextDto> texts = Lists.newArrayList();
         TextDto t1 = new TextDto();
         t1.setTextType("ZIR4");
-        t1.setContent("request json form cloud: " + jsonText);
+        t1.setContent("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.");
         texts.add(t1);
-
-        TextDto t2 = new TextDto();
-        t2.setTextType("ZIR4");
-        t2.setContent("ein langer und formatierter text");
-        texts.add(t2);
         solmanReq.setRichTexts(texts);
 
-        List<TextDto> ntexts = Lists.newArrayList();
-        TextDto nt1 = new TextDto();
-        nt1.setTextType("ZIR4");
-        nt1.setContent("ein langer und formatierter text");
-        ntexts.add(nt1);
 
-        TextDto nt2 = new TextDto();
-        nt2.setTextType("ZIR4");
-        nt2.setContent("ein langer und formatierter text");
-        ntexts.add(nt2);
-        solmanReq.setTexts(ntexts);
-
-        request.setJson(solmanReq);
+        String jsonString = objectMapper.writeValueAsString(solmanReq);
+        request.setJson(jsonString);
         return request;
     }
 }

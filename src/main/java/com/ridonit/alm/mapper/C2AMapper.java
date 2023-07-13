@@ -2,17 +2,16 @@ package com.ridonit.alm.mapper;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Lists;
+import com.ridonit.alm.client.BackendClient;
 import com.ridonit.alm.client.RestClient;
 import com.ridonit.alm.mapper.calm.CalmProcess;
 import com.ridonit.alm.model.CloudRequirement;
 import com.ridonit.alm.payload.CloudRequirementDto;
-import com.ridonit.alm.payload.HeaderDto;
-import com.ridonit.alm.payload.SolmanRequestDto;
 import com.ridonit.alm.payload.SolmanTransferDto;
 import com.ridonit.alm.service.CloudRequirementService;
 import com.ridonit.alm.service.SolmanTransferDtoService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -21,10 +20,13 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class C2AMapper {
+	private final String URL = "https://ridon-it-gmbh-development-ridon-ridon-development-alm-p361f7ea6.cfapps.eu10.hana.ondemand.com/sap/opu/odata/RIDONIT/CALM_API_SRV/Cloud_ALM_APISet/";
+
 
 	private final ObjectMapper objectMapper;
-	private final RestClient restClient;
+	private final BackendClient backendClient;
 	private final CloudRequirementService requirementService;
 	private final SolmanTransferDtoService solmanDtoService;
 
@@ -32,25 +34,26 @@ public class C2AMapper {
 		List<CloudRequirementDto> reqDtoList = objectMapper.readValue(jsonString, new TypeReference<List<CloudRequirementDto>>() {});
 		List<CloudRequirement> cloudRequirements = objectMapper.convertValue(reqDtoList, new TypeReference<List<CloudRequirement>>(){});
 
+
+
 		for(CloudRequirement req : cloudRequirements) {
-			/*
-			CloudRequirement existing = requirementService.findByCalmId(req.getId());
-			if(existing != null) {
-				if(existing.equals(req) == false) {
-					existing = merge(existing, req);
-					//requirementService.saveRequirement(existing);
-					//send change request
+			if(req.getSubStatus().equals("IN_REALIZATION")) {
+				CloudRequirement existing = requirementService.findByCalmId(req.getId());
+				if(existing != null) {
+					if(existing.equals(req) == false) {
+						existing = merge(existing, req);
+						//requirementService.saveRequirement(existing);
+						//send change request
+					}
+				}
+				else {
+					requirementService.saveRequirement(req);
+					SolmanTransferDto request = solmanDtoService.getByAlmId(req.getId(), req);
+					String solmanJsonString = objectMapper.writeValueAsString(request);
+					//String solmanJsonString = "{    \"AlmId\": \"11334354\",    \"Json\":    \"{    \\\"header\\\":{    \\\"priority\\\":\\\"1\\\",    \\\"description\\\":\\\"a description\\\",    \\\"process_type\\\":\\\"ZRIR\\\"    },    \\\"partners\\\":[{    \\\"function\\\":\\\"SMCD0006\\\",    \\\"partner_no\\\":374    },{    \\\"function\\\":\\\"SMIR0001\\\",    \\\"partner_no\\\":375    }    ],    \\\"customers\\\":[{    \\\"fieldname\\\":\\\"ZZ_SNOW_NUMBER\\\",    \\\"value\\\":\\\"inc12345\\\"    },{    \\\"fieldname\\\":\\\"ZZFLD000012\\\",    \\\"value\\\":\\\"883323\\\"    },{    \\\"fieldname\\\":\\\"ZZ_ALM_ID\\\",    \\\"value\\\":\\\"74272\\\"    }    ],    \\\"rich_texts\\\":[{    \\\"text_type\\\":\\\"ZIR4\\\",    \\\"content\\\":\\\"ein langer und formatierter text\\\"    }    ]    }\"}";
+					backendClient.poster(solmanJsonString, URL);
 				}
 			}
-			else {
-				requirementService.saveRequirement(req);
-				SolmanTransferDto request = solmanDtoService.getByAlmId(req.getId(), req.toString());
-				restClient.sendToSolutionManager(request);
-			}
-
-			 */
-
-
 		}
 
 
@@ -70,8 +73,8 @@ public class C2AMapper {
 		existing.setType(merge.getType());
 		existing.setStatus(merge.getStatus());
 		existing.setExternalId(merge.getExternalId());
-		existing.setStartDate(merge.getStartDate());
-		existing.setDueDate(merge.getDueDate());
+		existing.setStartdate(merge.getStartdate());
+		existing.setDuedate(merge.getDuedate());
 		existing.setPriorityId(merge.getPriorityId());
 		existing.setAssigneeId(merge.getAssigneeId());
 		existing.setAssigneeName(merge.getAssigneeName());

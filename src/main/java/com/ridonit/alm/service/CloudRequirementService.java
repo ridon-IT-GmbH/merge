@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Slf4j
@@ -25,7 +26,13 @@ public class CloudRequirementService {
     }
 
     public CloudRequirement findByCalmId(String calmId) {
-        return requirementRepo.findById(calmId).orElseThrow(() -> new EntityNotFoundException("cloud requirement not found"));
+        try {
+            Optional<CloudRequirement> optional = requirementRepo.findById(calmId);
+            CloudRequirement requirement = optional.get();
+            return requirement;
+        } catch(Exception e) {
+            return null;
+        }
     }
 
     public CloudRequirement saveRequirement(CloudRequirement cloudRequirement) {

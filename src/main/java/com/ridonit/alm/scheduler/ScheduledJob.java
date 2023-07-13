@@ -23,7 +23,7 @@ public class ScheduledJob {
     private final SapCloudClient cloudClient;
     private final C2AMapper mapper;
 
-    @Scheduled(fixedDelay = 60000)
+    @Scheduled(fixedDelay = 10000)
     public void getCloudRequirements() throws Exception {
         String cloudJsonString = cloudClient.getJsonStringFromCloud();
         mapper.getModifiedProcesses(cloudJsonString);

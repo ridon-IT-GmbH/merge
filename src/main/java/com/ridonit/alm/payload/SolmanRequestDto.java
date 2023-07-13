@@ -14,6 +14,5 @@ public class SolmanRequestDto {
     private List<PartnerDto> partners;
     private List<CustomerDto> customers;
     private List<TextDto> richTexts;
-    private List<TextDto> texts;
 
 }
